@@ -1,7 +1,10 @@
+// ignore_for_file: avoid_print
+
+import 'package:flutter/material.dart';
 import 'package:state_management/model/post.dart';
 
 class ListViewState {
-  List<Post> posts = [
+  ValueNotifier<List<Post>> posts = ValueNotifier<List<Post>>([
     Post(
       userId: 1,
       id: 1,
@@ -44,5 +47,17 @@ class ListViewState {
       body:
           "quia et suscipitsuscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto",
     ),
-  ];
+  ]);
+
+  void postRemoved(Post postToRemoved) {
+    print(posts.value.length);
+    posts.value.remove(postToRemoved);
+    posts.value = List<Post>.from(posts.value);
+    print(posts.value.length);
+  }
+
+  void postAdd(Post postToAdd) {
+    posts.value.add(postToAdd);
+    posts.value = List<Post>.from(posts.value);
+  }
 }

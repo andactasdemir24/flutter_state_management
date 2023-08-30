@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:state_management/appbar_icon.dart';
 import 'package:state_management/counter_state.dart';
 import 'package:state_management/list_view_container.dart';
+import 'package:state_management/list_view_state.dart';
+import 'package:state_management/model/post.dart';
 
 import 'counter_text.dart';
 import 'service/service_locator.dart';
@@ -38,6 +40,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Post postToAdd = Post(
+    userId: 99,
+    id: 99,
+    title: "asdfasdf",
+    body: "qwerqwerqwerqwerqwerqwerqwerqwerqwerqwerqwerqwe",
+  );
+
   @override
   void initState() {
     super.initState();
@@ -139,6 +148,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          getIt.get<ListViewState>().postAdd(postToAdd);
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
